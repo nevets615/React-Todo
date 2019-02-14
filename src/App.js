@@ -19,33 +19,49 @@ class App extends React.Component {
     super();
     this.state = {
       tasks: tasks,
-      input: "test"
+      input: ""
     };
   }
 
-  addTask = e => {
+  addTask = (e, item) => {
     e.preventDefault();
-    
-
-    const newTask = {
-      task: this.state.input,
+    const newItem = {
+        task: this.state.input,
       id: Date.now(),
       completed: false
-
     };
     this.setState({
-      tasks: [...this.state.tasks, newTask],
-      input: ""
+      tasks: [...this.state.tasks, newItem]
     });
   };
 
-  handleChanges = e => {
+  toggleTask = taskId => {
+    this.setState({
+      tasks: this.state.tasks.map(task => {
+        if (taskId === task.id) {
+          return {
+            ...task, 
+            completed: !task.completed
+          };
+        }
+        return task;
+      })
+    });
+  };
+  
+  clearCompleted = e => {
+    e.preventDefault();
+    console.log('running!');
+    this.setState({
+      tasks: this.state.tasks.filter(task => !task.completed)
+    });
+  };
+};
+
+handleChanges = e => {
     this.setState({input: e.target.value})
   }
 
-  // you will need a place to store your state in this component.
-  // design `App` to be the parent component of your application.
-  // this component is going to take care of state, and any change handlers you need to work with your state
   render() {
     return (
       <div>
@@ -55,24 +71,31 @@ class App extends React.Component {
           handleSubmit={this.addTask}
           handleChanges={this.handleChanges}
           task={this.state.input}
-        />
+          />
       </div>
     );
   }
-}
 
-export default App;
+  export default App;
+  
 
-{
-  /* {this.state.tasks.map((taskFromMap, index) => (
-          <Task key={index} task={taskFromMap} />
-        ))}
-      </div>
-      <TaskForm 
-      addTask={this.addTask}
-      task={this.state.task}
-      handleChanges={this.handleChanges}
-      id={this.state.id}
-      completed={this.state.completed}
-      /> */
-}
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+
+  // you will need a place to store your state in this component.
+  // design `App` to be the parent component of your application.
+  // this component is going to take care of state, and any change handlers you need to work with your state
+  
+  // };
+  // this.setState({
+    //   tasks: [...this.state.tasks, newTask],
+    //   input: ""
+    // });

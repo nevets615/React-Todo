@@ -1,6 +1,23 @@
 import React from 'react';
 
-const TaskForm = props => {
+class TaskForm extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        task: ''
+      };
+    }
+  
+    handleChanges = e => {
+      this.setState({ [e.target.task]: e.target.value });
+    };
+  
+    submitItem = e => {
+      this.setState({ task: '' });
+      this.props.addtask(e, this.state.task);
+    };
+    
+    render() {
     return (
         <form onSubmit={props.handleSubmit}>
         <input
@@ -14,5 +31,6 @@ const TaskForm = props => {
         <button type="">Clear Completed</button>
         </form>
     );
-};
+}
+}
 export default TaskForm;

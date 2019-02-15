@@ -4,9 +4,10 @@ import Todo from "./Todo";
 function TodoList(props) {
   return (
     <ul>
-      {props.tasks.map((taskFromMap, index) => (
-        <Todo key={index} task={taskFromMap} />
-      ))}
+      {props.todo.map(t => <Todo key= {t.id} todos={props.todo}/>
+      
+      )}
+
     </ul>
   );
 }

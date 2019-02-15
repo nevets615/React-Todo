@@ -1,7 +1,7 @@
 import React from "react";
 import TodoForm from "./components/TodoComponents/TodoForm";
 import TodoList from "./components/TodoComponents/TodoList";
-const tasks = [
+const todo = [
   {
     task: "Organize Garage",
     id: 1528817077286,
@@ -18,45 +18,46 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      tasks: tasks,
+      todo: todo,
       input: ""
     };
   }
 
+
   addTask = (e, item) => {
     e.preventDefault();
-    const newItem = {
+    const newTask = {
         task: this.state.input,
       id: Date.now(),
       completed: false
     };
     this.setState({
-      tasks: [...this.state.tasks, newItem]
+      todo: [...this.state.todo, newTask],
+      input: ""
     });
   };
 
-  toggleTask = taskId => {
+  toggleTodo = todoId => {
     this.setState({
-      tasks: this.state.tasks.map(task => {
-        if (taskId === task.id) {
+      todo: this.state.todo.map(todo => {
+        if (todoId === todo.id) {
           return {
-            ...task, 
-            completed: !task.completed
+            ...todo, 
+            completed: !todo.completed
           };
         }
-        return task;
+        return todo;
       })
     });
   };
   
   clearCompleted = e => {
     e.preventDefault();
-    console.log('running!');
-    this.setState({
-      tasks: this.state.tasks.filter(task => !task.completed)
+  this.setState({
+      todo: this.state.todo.filter(todo => !todo.completed)
     });
   };
-};
+
 
 handleChanges = e => {
     this.setState({input: e.target.value})
@@ -66,16 +67,16 @@ handleChanges = e => {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoList tasks={this.state.tasks} />
+        <TodoList todo={this.state.todo} toggleTodo={this.toggleTodo}/>
         <TodoForm
-          handleSubmit={this.addTask}
+          handleSubmit={this.addTodo}
           handleChanges={this.handleChanges}
           task={this.state.input}
           />
       </div>
     );
   }
-
+}
   export default App;
   
 

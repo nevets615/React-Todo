@@ -19,12 +19,12 @@ class TaskForm extends React.Component {
     
     render() {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
         <input
         type="text"
-        value={props.task}
+        value={this.task}
         task="task"
-        onChange={props.handleChanges}
+        onChange={this.handleChanges}
         placeholder="task"
         />
         <button type="submit">Add Todo</button>

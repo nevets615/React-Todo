@@ -1,7 +1,7 @@
 import React from "react";
 import TodoForm from "./components/TodoComponents/TodoForm";
 import TodoList from "./components/TodoComponents/TodoList";
-const todo = [
+const todos = [
   {
     task: "Organize Garage",
     id: 1528817077286,
@@ -18,31 +18,29 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todo: todo,
+      todos: todos,
       input: ""
     };
   }
 
-
-  addTask = (e, item) => {
+  addTodo = (e, item) => {
     e.preventDefault();
-    const newTask = {
-        task: this.state.input,
+    const newTodo = {
+      task: item,
       id: Date.now(),
       completed: false
     };
     this.setState({
-      todo: [...this.state.todo, newTask],
-      input: ""
+      todos: [...this.state.todos, newTodo]
     });
   };
 
   toggleTodo = todoId => {
     this.setState({
-      todo: this.state.todo.map(todo => {
+      todos: this.state.todos.map(todo => {
         if (todoId === todo.id) {
           return {
-            ...todo, 
+            ...todo,
             completed: !todo.completed
           };
         }
@@ -50,53 +48,40 @@ class App extends React.Component {
       })
     });
   };
-  
+
   clearCompleted = e => {
     e.preventDefault();
-  this.setState({
-      todo: this.state.todo.filter(todo => !todo.completed)
+    this.setState({
+      todos: this.state.todos.filter(todo => !todo.completed)
     });
   };
 
-
-handleChanges = e => {
-    this.setState({input: e.target.value})
-  }
+  handleChanges = e => {
+    this.setState({ input: e.target.value });
+  };
 
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoList todo={this.state.todo} toggleTodo={this.toggleTodo}/>
+        <TodoList todos={this.state.todos} toggleTodo={this.toggleTodo} />
         <TodoForm
           handleSubmit={this.addTodo}
           handleChanges={this.handleChanges}
-          task={this.state.input}
-          />
+          todo={this.state.input}
+        />
       </div>
     );
   }
 }
-  export default App;
-  
+export default App;
 
-  
-  
-  
-  
-  
-  
-  
+// you will need a place to store your state in this component.
+// design `App` to be the parent component of your application.
+// this component is going to take care of state, and any change handlers you need to work with your state
 
-
-  
-
-  // you will need a place to store your state in this component.
-  // design `App` to be the parent component of your application.
-  // this component is going to take care of state, and any change handlers you need to work with your state
-  
-  // };
-  // this.setState({
-    //   tasks: [...this.state.tasks, newTask],
-    //   input: ""
-    // });
+// };
+// this.setState({
+//   tasks: [...this.state.tasks, newTask],
+//   input: ""
+// });

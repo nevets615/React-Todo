@@ -1,20 +1,21 @@
 import React from 'react';
-
-class TaskForm extends React.Component {
+import "./Todo.css"
+class TodoForm extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        task: ''
+        todo: ''
       };
     }
   
     handleChanges = e => {
-      this.setState({ [e.target.task]: e.target.value });
+        this.setState({ todo: e.target.value });
+       
     };
   
-    submitItem = e => {
-      this.setState({ task: '' });
-      this.props.addtask(e, this.state.task);
+   handleSubmit= e => {
+       this.setState({ todo: '' });
+       this.props.handleSubmit(e, this.state.todo);
     };
     
     render() {
@@ -22,10 +23,10 @@ class TaskForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
         <input
         type="text"
-        value={this.task}
-        task="task"
+        value={this.state.todo}
+        todo="todo"
         onChange={this.handleChanges}
-        placeholder="task"
+        placeholder="Todo"
         />
         <button type="submit">Add Todo</button>
         <button type="">Clear Completed</button>
@@ -33,4 +34,4 @@ class TaskForm extends React.Component {
     );
 }
 }
-export default TaskForm;
+export default TodoForm;

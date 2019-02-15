@@ -4,11 +4,11 @@ import "./Todo.css"
 const Todo = props => {
 
     return (
-    <div className={props.todos.completed ? "task" : ""}
-    onClick={() => props.toggleTask(props.todo.id)}
+    <div className={props.todo.completed ? "task" : ""}
+    onClick={() => props.toggleTodo(props.todo.id)}
   >
         
-        <li>{props.todos.task}</li>
+        <li>{props.todo.task}</li>
     
     </div>
     );

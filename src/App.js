@@ -1,6 +1,7 @@
 import React from "react";
 import TodoForm from "./components/TodoComponents/TodoForm";
 import TodoList from "./components/TodoComponents/TodoList";
+import "./App.css"
 const todos = [
   {
     task: "Organize Garage",
@@ -63,12 +64,14 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h2>Welcome to your Todo App!</h2>
+        <h2>My Todo App</h2>
         <TodoList todos={this.state.todos} toggleTodo={this.toggleTodo} />
         <TodoForm
           handleSubmit={this.addTodo}
+          handleSubmits={this.clearCompleted}
           handleChanges={this.handleChanges}
           todo={this.state.input}
+          clearCompleted={this.clearCompleted}
         />
       </div>
     );
@@ -76,12 +79,4 @@ class App extends React.Component {
 }
 export default App;
 
-// you will need a place to store your state in this component.
-// design `App` to be the parent component of your application.
-// this component is going to take care of state, and any change handlers you need to work with your state
 
-// };
-// this.setState({
-//   tasks: [...this.state.tasks, newTask],
-//   input: ""
-// });
